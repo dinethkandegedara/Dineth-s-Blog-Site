@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3000;
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+require('dotenv').config();
+const helmet = require('helmet');
+app.use(helmet());
 
 // Routes
 app.use("/", postsRoutes);
