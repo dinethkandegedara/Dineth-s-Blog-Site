@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dineth's Blog Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center my-4">Dineth's Blog Site</h1> <!-- Updated title -->
+    <a href="/new-post" class="btn btn-primary mb-3">Create New Post</a>
+    <div class="row">
+      <% posts.forEach(post => { %>
+        <div class="col-md-4 mb-4"> <!-- Ensures 3 cards per row -->
+          <div class="card">
+            <% if (post.featureImage) { %>
+              <img src="<%= post.featureImage %>" class="card-img-top" alt="<%= post.title %>">
+            <% } %>
+            <div class="card-body">
+              <h5 class="card-title"><a href="/post/<%= post.slug %>"><%= post.title %></a></h5>
+              <p class="card-text"><%= post.content.substring(0, 100) + '...' %></p>
+              <small class="text-muted">Published on <%= post.date %></small>
+              <form action="/delete-post/<%= post.id %>" method="POST" class="mt-2" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                <a href="/edit-post/<%= post.id %>" class="btn btn-warning btn-sm">Edit</a>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
